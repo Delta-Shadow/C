@@ -1,3 +1,3 @@
-# This is a Test.
+# This is a Test
 
-We shall see who figures it out
+We shall see who figures it out.
