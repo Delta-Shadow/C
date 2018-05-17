@@ -33,15 +33,27 @@ body {
 
 .textbox {
     grid-column: 2/4;
-    padding: 1em;
+    padding: .7em;
+    font-size: 1em;
 }
 
 .butt {
     grid-column: 4;
-    padding: 1em;
+    padding: .7em;
+
+    color: white;
+    background-color: black;
+    outline: none;
+    border: #646464 solid 2px;
+    font-size: 1em;
+    transition: all .2s;
 }
 
 .symbol {
     grid-column: 3/4;
     margin-top: 3em;
+}
+
+.butt:hover {
+    background-color: #646464;
 }
