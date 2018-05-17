@@ -33,9 +33,10 @@ function drawSymbol() {
 
 function submit() {
     let tb = document.getElementById("textbox");
+    let input = tb.value.toLowerCase();
     fire.child("Answers").push(tb.value);
 
-    if (tb.value == CorrectAnswer) {
+    if (input == CorrectAnswer) {
         document.getElementsByClassName("title")[0].innerHTML = "Authorisation Granted";
         document.getElementsByClassName("subtitle")[0].innerHTML = "Delta Shadow will be Notified";
     } else {
