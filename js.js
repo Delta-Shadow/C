@@ -1,3 +1,15 @@
+let CorrectAnswer = "c";
+
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyDVtQZDxCN2h19POptmaRVPA0NAr4869XU",
+    authDomain: "c-19-5-1.firebaseapp.com",
+    databaseURL: "https://c-19-5-1.firebaseio.com",
+    projectId: "c-19-5-1",
+    storageBucket: "c-19-5-1.appspot.com",
+    messagingSenderId: "671289254200"
+};
+
 function drawSymbol() {
     let canvas = document.getElementById("symbol");
     let ctx = canvas.getContext("2d");
@@ -18,5 +30,20 @@ function drawSymbol() {
 
     ctx.stroke();
 }
+
+function submit() {
+    let tb = document.getElementById("textbox");
+    fire.child("Answers").push(tb.value);
+
+    if (tb.value == CorrectAnswer) {
+        document.getElementsByClassName("title")[0].innerHTML = "Authorisation Granted";
+        document.getElementsByClassName("subtitle")[0].innerHTML = "Delta Shadow will be Notified";
+    } else {
+        alert("Wrong Answer. Authorisation Declined.");
+    }
+}
+
+firebase.initializeApp(config);
+let fire = firebase.database().ref();
 
 drawSymbol();
