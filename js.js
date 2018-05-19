@@ -2,6 +2,7 @@
 // The Correct Answer is "Sea"
 
 let CorrectAnswer = "Sea";
+let key;
 
 // Initialize Firebase
 var config = {
@@ -50,13 +51,25 @@ function submit() {
     let o = {
         answer: input,
         date: d.getDate() + "-" + d.getMonth() + "-" + d.getFullYear(),
-        time: d.getHours() + ":" + d.getMinutes()
+        time: d.getHours() + ":" + d.getMinutes(),
+        id: key
     }
 
     fire.child("Answers").push(o);
+}
+
+function logVisit() {
+    let d = new Date();
+    let o = {
+        date: d.getDate() + "-" + d.getMonth() + "-" + d.getFullYear(),
+        time: d.getHours() + ":" + d.getMinutes()
+    }
+    
+    fire.child("Visits").push(o).then((snap) => { key = snap.key });
 }
 
 firebase.initializeApp(config);
 let fire = firebase.database().ref();
 
 drawSymbol();
+logVisit();
