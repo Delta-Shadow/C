@@ -35,6 +35,27 @@ function drawSymbol() {
     ctx.stroke();
 }
 
+function logVisit() {
+    let d = new Date();
+    let o = {
+        date: d.getDate() + "-" + (parseInt(d.getMonth()) + 1) + "-" + d.getFullYear(),
+        time: d.getHours() + ":" + d.getMinutes()
+    }
+    
+    fire.child("Visits").push(o).then((snap) => { key = snap.key });
+}
+
+function logSuccess() {
+    let d = new Date();
+    let o = {
+        id: key,
+        date: d.getDate() + "-" + (parseInt(d.getMonth()) + 1) + "-" + d.getFullYear(),
+        time: d.getHours() + ":" + d.getMinutes()
+    }
+    
+    fire.child("Correct Answers").push(o);
+}
+
 function submit() {
     let tb = document.getElementById("textbox");
     let input = tb.value;
@@ -43,6 +64,7 @@ function submit() {
     if (formattedInput == "c") {
         document.getElementsByClassName("title")[0].innerHTML = "Authorisation Granted";
         document.getElementsByClassName("subtitle")[0].innerHTML = "Delta Shadow will be Notified";
+        logSuccess();
     } else {
         alert("Wrong Answer. Authorisation Declined.");
     }
@@ -58,15 +80,7 @@ function submit() {
     fire.child("Answers").push(o);
 }
 
-function logVisit() {
-    let d = new Date();
-    let o = {
-        date: d.getDate() + "-" + (parseInt(d.getMonth()) + 1) + "-" + d.getFullYear(),
-        time: d.getHours() + ":" + d.getMinutes()
-    }
-    
-    fire.child("Visits").push(o).then((snap) => { key = snap.key });
-}
+
 
 firebase.initializeApp(config);
 let fire = firebase.database().ref();
