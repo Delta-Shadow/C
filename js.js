@@ -50,7 +50,7 @@ function submit() {
     let d = new Date();
     let o = {
         answer: input,
-        date: d.getDate() + "-" + d.getMonth() + "-" + d.getFullYear(),
+        date: d.getDate() + "-" + (parseInt(d.getMonth()) + 1) + "-" + d.getFullYear(),
         time: d.getHours() + ":" + d.getMinutes(),
         id: key
     }
@@ -61,7 +61,7 @@ function submit() {
 function logVisit() {
     let d = new Date();
     let o = {
-        date: d.getDate() + "-" + d.getMonth() + "-" + d.getFullYear(),
+        date: d.getDate() + "-" + (parseInt(d.getMonth()) + 1) + "-" + d.getFullYear(),
         time: d.getHours() + ":" + d.getMinutes()
     }
     
