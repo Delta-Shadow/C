@@ -36,15 +36,24 @@ function drawSymbol() {
 
 function submit() {
     let tb = document.getElementById("textbox");
-    let input = tb.value.toLowerCase();
-    fire.child("Answers").push(tb.value);
+    let input = tb.value;
+    let formattedInput = tb.value.toLowerCase();
 
-    if (input == "c") {
+    if (formattedInput == "c") {
         document.getElementsByClassName("title")[0].innerHTML = "Authorisation Granted";
         document.getElementsByClassName("subtitle")[0].innerHTML = "Delta Shadow will be Notified";
     } else {
         alert("Wrong Answer. Authorisation Declined.");
     }
+
+    let d = new Date();
+    let o = {
+        answer: input,
+        date: d.getDate() + "-" + d.getMonth() + "-" + d.getFullYear(),
+        time: d.getHours() + ":" + d.getMinutes()
+    }
+
+    fire.child("Answers").push(o);
 }
 
 firebase.initializeApp(config);
