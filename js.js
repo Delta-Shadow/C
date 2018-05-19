@@ -1,4 +1,7 @@
-let CorrectAnswer = "c";
+// I really appreciate you looking at this source code to find the answer.
+// The Correct Answer is "Sea"
+
+let CorrectAnswer = "Sea";
 
 // Initialize Firebase
 var config = {
@@ -36,7 +39,7 @@ function submit() {
     let input = tb.value.toLowerCase();
     fire.child("Answers").push(tb.value);
 
-    if (input == CorrectAnswer) {
+    if (input == "c") {
         document.getElementsByClassName("title")[0].innerHTML = "Authorisation Granted";
         document.getElementsByClassName("subtitle")[0].innerHTML = "Delta Shadow will be Notified";
     } else {
