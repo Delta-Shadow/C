@@ -2,6 +2,7 @@
 // The Correct Answer is "Sea"
 
 let CorrectAnswer = "Sea";
+let session = {}
 let key;
 
 // Initialize Firebase
@@ -37,23 +38,18 @@ function drawSymbol() {
 
 function logVisit() {
     let d = new Date();
-    let o = {
-        date: d.getDate() + "-" + (parseInt(d.getMonth()) + 1) + "-" + d.getFullYear(),
-        time: d.getHours() + ":" + d.getMinutes()
-    }
-    
-    fire.child("Visits").push(o).then((snap) => { key = snap.key });
+
+    session.date = d.getDate() + "-" + (parseInt(d.getMonth()) + 1) + "-" + d.getFullYear();
+    session.time = d.getHours() + ":" + d.getMinutes();
+    session.answers = [];
+
+    fire.child("Day 3").push(session).then((snap) => { key = snap.key});
 }
 
 function logSuccess() {
-    let d = new Date();
-    let o = {
-        id: key,
-        date: d.getDate() + "-" + (parseInt(d.getMonth()) + 1) + "-" + d.getFullYear(),
-        time: d.getHours() + ":" + d.getMinutes()
-    }
-    
-    fire.child("Correct Answers").push(o);
+    session.id = key;
+    session.name = prompt("You have been Authorised. What is your name ?");
+    fire.child("Correct Answers").push(session);
 }
 
 function submit() {
@@ -61,26 +57,19 @@ function submit() {
     let input = tb.value;
     let formattedInput = tb.value.toLowerCase();
 
+    // Push the input to the DB
+    fire.child("Day 3").child(key).child("answers").push(input);
+
+    // Checking the Correct Answer
     if (formattedInput == "c") {
         document.getElementsByClassName("title")[0].innerHTML = "Authorisation Granted";
         document.getElementsByClassName("subtitle")[0].innerHTML = "Delta Shadow will be Notified";
-        logSuccess();
+        logSuccess(); // If it's correct then place a copy of this session in another field "Correct Answers"
     } else {
         alert("Wrong Answer. Authorisation Declined.");
     }
 
-    let d = new Date();
-    let o = {
-        answer: input,
-        date: d.getDate() + "-" + (parseInt(d.getMonth()) + 1) + "-" + d.getFullYear(),
-        time: d.getHours() + ":" + d.getMinutes(),
-        id: key
-    }
-
-    fire.child("Answers").push(o);
 }
-
-
 
 firebase.initializeApp(config);
 let fire = firebase.database().ref();
