@@ -43,7 +43,7 @@ function logVisit() {
     session.time = d.getHours() + ":" + d.getMinutes();
     session.answers = [];
 
-    fire.child("Day 3").push(session).then((snap) => { key = snap.key});
+    fire.child("Day 4").push(session).then((snap) => { key = snap.key});
 }
 
 function logSuccess() {
@@ -58,7 +58,7 @@ function submit() {
     let formattedInput = tb.value.toLowerCase();
 
     // Push the input to the DB
-    fire.child("Day 3").child(key).child("answers").push(input);
+    fire.child("Day 4").child(key).child("answers").push(input);
 
     // Checking the Correct Answer
     if (formattedInput == "c") {
